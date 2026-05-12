@@ -2,10 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const HERO_KEYFRAMES = `
-@keyframes ed-underline-grow {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
 @keyframes ed-orbit-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
@@ -71,10 +67,7 @@ const HeroEditorial = () => {
                     >
                         Technology<span style={styles.plus}>+</span>
                         <br />
-                        <em style={styles.headlineEm}>
-                            Human-in-the-Loop
-                            <span style={styles.headlineUnderline} aria-hidden="true" />
-                        </em>
+                        <em style={styles.headlineEm}>Human-in-the-Loop</em>
                         <br />
                         for&nbsp;Deal&nbsp;Discovery.
                     </motion.h1>
@@ -130,21 +123,7 @@ const HeroEditorial = () => {
                         transition={{ duration: 0.7, delay: 0.32 }}
                         style={styles.ctaRow}
                     >
-                        <a href="#demo" style={styles.ctaGhost}>
-                            Schedule a demo
-                            <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true">
-                                <path
-                                    d="M3 10h13M11 5l5 5-5 5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.6"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </a>
-                        <span style={styles.ctaSep}>or</span>
-                        <span style={styles.ctaHint}>explore the platform tour</span>
+                        <a href="#demo" className="btn-donate" style={{ margin: 0 }}>Request for demo</a>
                     </motion.div>
                 </div>
 
@@ -414,19 +393,7 @@ const styles = {
     headlineEm: {
         fontStyle: 'italic',
         color: '#04223a',
-        position: 'relative',
         display: 'inline-block',
-    },
-    headlineUnderline: {
-        position: 'absolute',
-        left: '-2%',
-        right: '-2%',
-        bottom: '0.08em',
-        height: '0.16em',
-        background: '#f9a11f',
-        zIndex: -1,
-        transformOrigin: 'left center',
-        animation: 'ed-underline-grow 1.2s cubic-bezier(0.7, 0, 0.3, 1) 0.4s both',
     },
     pillars: {
         display: 'grid',
@@ -481,35 +448,6 @@ const styles = {
         alignItems: 'center',
         gap: '18px',
         flexWrap: 'wrap',
-    },
-    ctaGhost: {
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '10px',
-        background: 'transparent',
-        color: '#04223a',
-        borderBottom: '2px solid #04223a',
-        padding: '10px 0',
-        borderRadius: 0,
-        fontFamily: '"Roboto", -apple-system, sans-serif',
-        fontWeight: 500,
-        fontSize: '14px',
-        letterSpacing: '0.01em',
-        textDecoration: 'none',
-        transition: 'color 0.18s ease, border-color 0.18s ease',
-    },
-    ctaSep: {
-        fontFamily: '"PT Serif", Georgia, serif',
-        fontStyle: 'italic',
-        color: '#777',
-        fontSize: '14px',
-    },
-    ctaHint: {
-        fontFamily: '"Roboto", -apple-system, sans-serif',
-        fontSize: '13px',
-        color: '#555',
-        borderBottom: '1px dashed rgba(4, 34, 58, 0.3)',
-        paddingBottom: '1px',
     },
     constellationWrap: {
         position: 'absolute',
