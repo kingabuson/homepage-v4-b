@@ -52,14 +52,6 @@ const HeroEditorial = () => {
             </div>
 
             <div className="container" style={styles.container}>
-                <div style={styles.brandRow}>
-                    <div style={styles.brandMark}>
-                        <span style={styles.brandDot} />
-                        <span style={styles.brandName}>tracxn</span>
-                    </div>
-                    <span style={styles.versionTag}>Technology + Human-in-the-Loop</span>
-                </div>
-
                 <div style={styles.grid}>
                     <motion.div
                         initial={{ opacity: 0, y: 14 }}
