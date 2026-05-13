@@ -5,6 +5,10 @@ import { ArrowUpRight } from 'lucide-react';
 /**
  * Floating "Request for demo" pill anchored to the bottom-center of the viewport.
  * Reveals after the user scrolls past the hero section, mirroring harmonic.ai.
+ *
+ * Centering is handled by a fixed wrapper using flex (not transform), so the
+ * inner motion element can own its own transform stack for the entrance/exit
+ * animation without fighting `translateX(-50%)`.
  */
 const FloatingCTA = ({ href = '#demo', label = 'Request for demo' }) => {
     const [visible, setVisible] = useState(false);
@@ -35,34 +39,43 @@ const FloatingCTA = ({ href = '#demo', label = 'Request for demo' }) => {
     }, []);
 
     return (
-        <AnimatePresence>
-            {visible && (
-                <motion.a
-                    href={href}
-                    aria-label={label}
-                    initial={{ opacity: 0, y: 30, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 30, scale: 0.96 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                    whileHover={{ y: -2 }}
-                    style={styles.pill}
-                >
-                    <span style={styles.label}>{label}</span>
-                    <span style={styles.iconWrap} aria-hidden="true">
-                        <ArrowUpRight size={16} strokeWidth={2.2} />
-                    </span>
-                </motion.a>
-            )}
-        </AnimatePresence>
+        <div style={styles.anchor} aria-hidden={!visible}>
+            <AnimatePresence>
+                {visible && (
+                    <motion.a
+                        href={href}
+                        aria-label={label}
+                        initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 30, scale: 0.96 }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                        whileHover={{ y: -2 }}
+                        style={styles.pill}
+                    >
+                        <span style={styles.label}>{label}</span>
+                        <span style={styles.iconWrap} aria-hidden="true">
+                            <ArrowUpRight size={16} strokeWidth={2.2} />
+                        </span>
+                    </motion.a>
+                )}
+            </AnimatePresence>
+        </div>
     );
 };
 
 const styles = {
-    pill: {
+    anchor: {
         position: 'fixed',
-        left: '50%',
+        left: 0,
+        right: 0,
         bottom: '24px',
-        transform: 'translateX(-50%)',
+        display: 'flex',
+        justifyContent: 'center',
+        pointerEvents: 'none',
+        zIndex: 1000,
+    },
+    pill: {
+        pointerEvents: 'auto',
         display: 'inline-flex',
         alignItems: 'center',
         gap: '14px',
@@ -77,7 +90,6 @@ const styles = {
         fontWeight: 600,
         fontSize: '0.95rem',
         letterSpacing: '0.01em',
-        zIndex: 1000,
         willChange: 'transform, opacity',
     },
     label: {
