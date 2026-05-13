@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import HeroEditorial from './components/HeroEditorial';
 import LogoMarquee from './components/LogoMarquee';
+import FloatingCTA from './components/FloatingCTA';
 
 import Features from './components/Features';
 import Stats from './components/Stats';
@@ -48,6 +49,7 @@ function App() {
         </AnimatedSection>
       </main>
       <Footer />
+      <FloatingCTA href="#demo" label="Request for demo" />
     </div>
   );
 }
